@@ -9,9 +9,10 @@ const pLoader = document.querySelector('.loader');
 const pError = document.querySelector('.error');
 const infoCat = document.querySelector('.cat-info');
 breedSelect.addEventListener('change', onSetOutput);
-pLoader.classList.remove('visibility');
+// pLoader.classList.remove('visibility');
 breedSelect.classList.add('visibility');
 pError.classList.add('visibility');
+// infoCat.classList.add('visibility');
 //*---------------------------------------------------------------/
 fetchBreeds()
   .then(data => createMarkup(data))
@@ -20,6 +21,7 @@ fetchBreeds()
       Notify.failure('Oops! Something went wrong! Try reloading the page!');
   })
   .finally(() => {
+    // infoCat.classList.remove('visibility');
     pLoader.classList.add('visibility');
     breedSelect.classList.remove('visibility');
   });
@@ -35,16 +37,23 @@ function createMarkup(arr) {
 }
 
 function onSetOutput(evt) {
-  pLoader.classList.remove('visibility');
+  infoCat.classList.add('visibility'),
+    pError.classList.add('visibility'),
+    pLoader.classList.remove('visibility');
   const breedId = evt.target.value;
-  console.log(breedId);
+  // console.log(breedId);
   fetchCatByBreed(breedId)
-    .then(breed => createInfoCat(breed))
+    .then(breed => {
+      createInfoCat(breed), infoCat.classList.remove('visibility');
+    })
     .catch(error => {
-      pError.classList.remove('visibility'),
+      infoCat.classList.add('visibility'),
+        pError.classList.remove('visibility'),
         Notify.failure('Oops! Something went wrong! Try reloading the page!');
     })
-    .finally(() => pLoader.classList.add('visibility'));
+    .finally(() => {
+      pLoader.classList.add('visibility');
+    });
 }
 
 function createInfoCat(breed) {

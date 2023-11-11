@@ -1,9 +1,11 @@
+body {
+  background: #ccc9c9;
+}
+
 .visibility {
   display: none;
 }
-/* .ss-content {
-  transition: none;
-} */
+
 .error {
   font-size: 20px;
   color: red;
@@ -36,6 +38,12 @@
 .cat_name {
   font-size: 48px;
   font-weight: 600;
+}
+.breed-select {
+  font-size: 18px;
+  font-weight: normal;
+  width: 300px;
+  background-color: #b0f8d4;
 }
 
 .loader {
